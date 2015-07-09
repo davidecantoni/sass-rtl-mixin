@@ -1,0 +1,23 @@
+section {
+  float: left;
+  width: 48%;
+  margin: 0 2% 0 0;
+
+  // define here inline your rtl conditions
+  @include rtl {
+    float: right;
+    margin: 0 0 0 2%;
+  }
+}
+
+aside {
+  float: left;
+  width: 48%;
+  margin: 0 0 2% 0;
+
+  // define here inline your rtl conditions
+  @include rtl {
+    float: right;
+    margin: 0 2% 0 0;
+  }
+}

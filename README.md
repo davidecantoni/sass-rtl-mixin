@@ -159,12 +159,13 @@ margin: 0 2% 0 0;
 Same as in approach 2 i just load the file needed, depending on the language and direction.
 
 ```html
+// index.html
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <link rel="stylesheet" href="css/main-ltr.css">
+    <link rel="stylesheet" href="css/dist/main-ltr.css">
     <!-- or this file if on rtl version
-    	<link rel="stylesheet" href="css/main-rtl.css">
+    	<link rel="stylesheet" href="css/dist/main-rtl.css">
     -->
   </head>
   <body>
@@ -175,7 +176,7 @@ Same as in approach 2 i just load the file needed, depending on the language and
 ```
 
 ```scss
-// css/mixin.scss
+// css/src/modules/_rtl.scss
 $isLTR: false !default;
 @mixin rtl {
   @if $isLTR {
@@ -195,7 +196,7 @@ The above piece of code is doing the magic work. It takes a variable $isLTR whic
 If this variable is true it will print the code.
 
 ```scss
-// css/base.scss
+// css/src/partials/_base.scss
 section {
   float: left;
   width: 48%;
@@ -221,18 +222,18 @@ aside {
 ```
 
 ```scss
-// css/main-ltr.scss
-@import "css/mixin";
-@import "css/base";
+// css/src/main-ltr.scss
+@import "css/src/modules/rtl";
+@import "css/src/partials/base";
 ```
 
 The above code will already generate our final ltr (english) version (don't forget to always compress the css file!).
 
 ```scss
-// css/main-rtl.scss
+// css/src/main-rtl.scss
 $isLTR: true;
-@import "css/mixin";
-@import "css/base";
+@import "css/src/modules/rtl";
+@import "css/src/partials/base";
 ```
 
 In the later case the conditions will be printent twice, onces as ltr (english) and once as rtl (arabic).
@@ -240,6 +241,7 @@ In the later case the conditions will be printent twice, onces as ltr (english) 
 This would be the output:
 
 ```scss
+// css/dist/main-rtl.css
 section {
   float: left;
   width: 48%;
@@ -269,6 +271,7 @@ Let's go one step further and finalise our output.
 If we use now a css minifier, it will be intelligent enough to reduce the generated code into the following code:
 
 ```css
+// css/dist/main-rtl.min.css
 section{width:48%;float:right;margin:0 0 0 2%}aside{width:48%;float:right;margin:0 2% 0 0}
 ```
 
@@ -280,4 +283,4 @@ I used for this tiny example this online minifier:
 There are plenty of minifier, to mention just a few:
 
 - [grunt-contrib-cssmin](https://github.com/gruntjs/grunt-contrib-cssmin)
-- [gulp-minify-css](https://github.com/murphydanger/gulp-minify-css)
+- [gulp-cssmin](https://www.npmjs.com/package/gulp-cssmin)

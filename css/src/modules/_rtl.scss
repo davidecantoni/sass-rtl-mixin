@@ -1,0 +1,14 @@
+$isLTR: false !default;
+
+@mixin rtl {
+  @if $isLTR {
+    @if & {
+      & {
+        @content;
+      }
+    }
+    @else {
+      @content;
+    }
+  }
+}
