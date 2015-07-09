@@ -7,7 +7,7 @@
 There are many solutions out there in the world wide web how to write css with rtl support in an effective and easily way to write and maintain.
 
 I wanna show you a few solutions i explored while seeking the web.
-If you can't wait just skip directly to my version we use in production -> [Using a simple mixin](#mixin)
+If you can't wait just skip directly to my version we use in production -> [Using a simple mixin](#approach-3-using-a-simple-mixin)
 
 For the example i used SCSSSass syntax:
 
@@ -154,7 +154,7 @@ margin: 0 2% 0 0;
 
 
 
-### <a id="mixin">Approach 3: Using a simple mixin</a>
+### Approach 3: Using a simple mixin
 
 Same as in approach 2 i just load the file needed, depending on the language and direction.
 
