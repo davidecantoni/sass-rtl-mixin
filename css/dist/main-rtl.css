@@ -1,0 +1,15 @@
+section {
+  float: left;
+  width: 48%;
+  margin: 0 2% 0 0; }
+  section {
+    float: right;
+    margin: 0 0 0 2%; }
+
+aside {
+  float: left;
+  width: 48%;
+  margin: 0 0 2% 0; }
+  aside {
+    float: right;
+    margin: 0 2% 0 0; }
