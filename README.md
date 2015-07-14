@@ -4,10 +4,10 @@
 
 ### Introduction
 
-There are many solutions out there in the world wide web how to write css with rtl support in an effective and easily way to write and maintain.
+There are many solutions out there in the world wide web, how to write css with rtl support in an effective and easily way to maintain.
 
 I wanna show you a few solutions i explored while seeking the web.
-If you can't wait just skip directly to my version we use in production -> [Using a simple mixin](#approach-3-using-a-simple-mixin)
+If you can't wait just skip directly to my version i am using in production -> [Using a simple mixin](#approach-3-using-a-simple-mixin)
 
 For the example i used SCSSSass syntax:
 
@@ -18,7 +18,7 @@ For the example i used SCSSSass syntax:
 
 ### Approach 1: Overwriting default css
 
-This approach will just load a second file which therefore will overwrite the default conditions.
+This approach will just load a second file which overwrites the default conditions.
 
 ```html
 <!DOCTYPE html>
@@ -88,14 +88,14 @@ aside {
 
 To avoid it, you you could easily use both conditions in the same file as shown.
 
-But in both cases the problem still remains because we always load unnecessary code for nothing! 
+But in both cases the problem still remains because we always load both versions! 
 For performance reasons we sould keep our css as small as possible to avoid parser blocking on page load -> very expensive!!!
 
 
 
 ### Approach 2: Using a variable to set the direction
 
-For this approach you are including only **one file** depending on the direction you are using. The direction is set while compiling with a variable.
+In this approach i am including only **one file** depending on the direction you are using. The direction is set dynamically.
 
 Let's have a look:
 
@@ -132,7 +132,7 @@ aside {
 }
 ```
 
-As you could see, the file uses variables which will be replaced by the direction set.
+As you can see, a variable called $direction will handle the correct direction for you.
 
 ```scss
 // css/main-ltr.scss
@@ -146,11 +146,13 @@ $direction: right;
 ```
 
 The two files will load the base code and reset the direction if needed.
-With this approach you have to pay attention how you define your styles, as an example here i couldn't reuse my code style i used in the first example 
+This approach is powerfull but not 100% flexible.
+You still have to pay attention how you define your styles, as an example here i couldn't reuse my code style i used in the first example:
 
 ```
 margin: 0 2% 0 0;
 ```
+
 
 
 
@@ -177,9 +179,9 @@ Same as in approach 2 i just load the file needed, depending on the language and
 
 ```scss
 // css/src/modules/_rtl.scss
-$isLTR: false !default;
+$isRTL: false !default;
 @mixin rtl {
-  @if $isLTR {
+  @if $isRTL {
     @if & {
       & {
         @content;
@@ -192,7 +194,7 @@ $isLTR: false !default;
 }
 ```
 
-The above piece of code is doing the magic work. It takes a variable $isLTR which is set by default to false, this means the content won't be printed.
+The above piece of code is doing the magic work. It takes a variable $isRTL which is set by default to false, this means the content won't be printed.
 If this variable is true it will print the code.
 
 ```scss
@@ -231,7 +233,7 @@ The above code will already generate our final ltr (english) version (don't forg
 
 ```scss
 // css/src/main-rtl.scss
-$isLTR: true;
+$isRTL: true;
 @import "css/src/modules/rtl";
 @import "css/src/partials/base";
 ```
@@ -263,19 +265,19 @@ aside {
 }
 ```
 
-mhhh, but this is not really good?
+As you might noticed this is not really good, isn't it?
 
 You are right!
 
-Let's go one step further and finalise our output.
-If we use now a css minifier, it will be intelligent enough to reduce the generated code into the following code:
+Let's go one step further and compress our output.
+We use a css minifier which will reduce the generated code into the following code:
 
 ```css
 // css/dist/main-rtl.min.css
 section{width:48%;float:right;margin:0 0 0 2%}aside{width:48%;float:right;margin:0 2% 0 0}
 ```
 
-As you can see, no code overwriting ;-)
+As you can see, no code overwriting anymore ;-)
 I used for this tiny example this online minifier:
 
 - [CSS minifier](http://cssminifier.com/)
