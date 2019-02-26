@@ -86,7 +86,7 @@ aside {
 }
 ```
 
-To avoid it, you you could easily use both conditions in the same file as shown.
+To avoid it, you could easily use both conditions in the same file as shown.
 
 But in both cases the problem still remains because we always load both versions! 
 For performance reasons we sould keep our css as small as possible to avoid parser blocking on page load -> very expensive!!!
